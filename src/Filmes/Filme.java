@@ -7,25 +7,29 @@ import java.util.ArrayList;
  * @author miche
  */
 public class Filme {
-    private int id;
     private int idFilme;
-    private String avaliacao;
-    private ArrayList<Recibo> recibos;
+    private ArrayList <Double> avaliacao;
+    private double avaliacaoMedia;
+    private ArrayList <Integer> listaUsuarios;
+   
+
+    public Filme(int id, int idFilme, double avaliacao) {
+        
+        this.idFilme = idFilme;
+        this.avaliacao = new ArrayList<>();
+        this.avaliacao.add(avaliacao);
+        this.listaUsuarios = new ArrayList<>();
+        this.listaUsuarios.add(id);
+    }
+        
+    public void addUsuario(int valor){
+        this.listaUsuarios.add(valor);
+    }
     
-
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
+    public int getQuantidadeUsuarios(){
+        return listaUsuarios.size();
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * @return the filme
@@ -41,47 +45,21 @@ public class Filme {
         this.idFilme = idFilme;
     }
 
-    /**
-     * @return the avaliacao
-     */
-    public String getAvaliacao() {
-        return avaliacao;
-    }
 
-    /**
-     * @param avaliacao the avaliacao to set
-     */
-    public void setAvaliacao(String avaliacao) {
-        this.avaliacao = avaliacao;
+    public void addAvaliacao(double avaliacao){
+        this.avaliacao.add(avaliacao);
     }
     
-    public void imprimeFilme() {
-        System.out.println("Id: " + getId()+ " Filme: " + this.idFilme + "Avaliacao " + this.avaliacao);
-    }
-    public ArrayList<Recibo> getRecibos() {
-        return recibos;
-    }
-
-    public void setRecibos(ArrayList<Recibo> recibos) {
-        this.recibos = recibos;
-    }
-
-    /**
-     * Adiciona um novo Recibo ao Filme em questao
-     *
-     * @param recibo Recibo do gasto realizado pelo deputado
-     */
-    public void addRecibo(Recibo recibo) {
-        this.recibos.add(recibo);
-    }
-
-    /**
-     * Imprime todos os Recibos de um determinado Filme
-     */
-   public void imprimeRecibos() {
-        for (int i = 0; i < recibos.size(); i++) {
-            System.out.println(recibos.get(i).getGasto());
+ 
+    public double getAvaliacao(){
+        this.avaliacaoMedia = 0;
+        for(int i=0;i<avaliacao.size();i++){
+            this.avaliacaoMedia = this.avaliacao.get(i);
         }
+        
+        return this.avaliacaoMedia/this.avaliacao.size();
     }
+    
+    
     
 }

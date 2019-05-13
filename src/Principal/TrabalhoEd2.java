@@ -5,12 +5,16 @@
  */
 package Principal;
 
+import LeituraArquivo.AnaliseDados;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  *
@@ -24,7 +28,7 @@ public class TrabalhoEd2 {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        /*
+        
         ////////////////// Criar arquivo ///////////////////////
         File arquivo = new File("teste.txt");
         try(FileWriter fw = new FileWriter(arquivo)){
@@ -35,7 +39,9 @@ public class TrabalhoEd2 {
         }   
         ///////////////////////////////////////////////////////
        
-        File arquivo2 = new File("ratingsTRATADO.txt");
+        AnaliseDados ad = new AnaliseDados(5000);
+        
+        /*
         try(FileReader fr = new FileReader(arquivo2)){
             int c = fr.read();
             while(c != -1){
@@ -44,8 +50,8 @@ public class TrabalhoEd2 {
             }
         }catch(IOException ex){
             ex.printStackTrace();
-        } 
-       */
+        } */
+       
         
     }
 }

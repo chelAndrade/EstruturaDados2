@@ -7,12 +7,13 @@ package Algoritmos;
 
 import Filmes.Filme;
 import Relatorio.Relatorio;
+/*
 
 /**
  * Implementacao dos algoritmos de ordenacao usados nos Filmes 
  */
 public class AlgoritmosOrdenacao {
-    
+    /*
  public static void quickSortRec(ListaEncadeada<Filme> filmes, Relatorio relatorio) {
         quickSortRec(filmes, 0, filmes.getTamanho() - 1, relatorio);
     }
@@ -31,7 +32,7 @@ public class AlgoritmosOrdenacao {
         contInteracao++;
         relatorio.setInteracao((relatorio.getInteracao() + contInteracao));
     }
-
+/*
     //Cria as particoes para o algoritmo
     private static int particionaQuickSortRec(ListaEncadeada<Filme> filmes, int min, int max, Relatorio relatorio) {
         int contInteracao = 1;
@@ -54,7 +55,7 @@ public class AlgoritmosOrdenacao {
         return i + 1;
     }
 
-
+/*
 public static void insertionSort(ListaEncadeada<Filme> filmes, Relatorio relatorio) {
         insertionSort(filmes, 0, filmes.getTamanho(), relatorio);
     }
@@ -86,6 +87,7 @@ public static void insertionSort(ListaEncadeada<Filme> filmes, Relatorio relator
      * @param relatorio Acesso ao relatorio para gravar os dados de analise
      */
     //Chamada da funcao, calcula os parametros necessarios para execucao
+    /*
     public static void mergeSort(ListaEncadeada<Filme> filmes, Relatorio relatorio) {
         mergeSort(filmes, 0, filmes.getTamanho() - 1, relatorio);
     }
@@ -105,7 +107,7 @@ public static void insertionSort(ListaEncadeada<Filme> filmes, Relatorio relator
         contInteracao++;
         relatorio.setInteracao((relatorio.getInteracao() + contInteracao));
     }
-
+/*
     //Funcao principal do algoritmo Merge Sort
     private static void merge(ListaEncadeada<Filme> filmes, int esq, int meio, int dir, Relatorio relatorio) {
         // Encontra os tamanhos dos dois sub arrays para serem mesclados
@@ -176,6 +178,7 @@ public static void insertionSort(ListaEncadeada<Filme> filmes, Relatorio relator
      * @param relatorio Acesso ao relatorio para gravar os dados de analise
      */
     //Chamada da funcao principal
+    /*
     public static void heapSort(ListaEncadeada<Filme> filmes, Relatorio relatorio) {
         int n = filmes.getTamanho();
         // Constroi a Heap
@@ -223,4 +226,5 @@ public static void insertionSort(ListaEncadeada<Filme> filmes, Relatorio relator
         contInteracao++;
         relatorio.setInteracao((relatorio.getInteracao() + contInteracao));
     }
+*/
 }
