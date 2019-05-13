@@ -57,7 +57,9 @@ public class Filme {
             this.avaliacaoMedia = this.avaliacao.get(i);
         }
         
-        return this.avaliacaoMedia/this.avaliacao.size();
+        this.avaliacaoMedia = this.avaliacaoMedia/this.avaliacao.size();
+        
+        return this.avaliacaoMedia;
     }
     
     

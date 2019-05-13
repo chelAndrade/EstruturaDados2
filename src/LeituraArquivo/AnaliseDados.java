@@ -28,6 +28,7 @@ public class AnaliseDados {
     private File arquivo;
 
     public AnaliseDados(int quantidade) {
+        System.out.println("Criando Analise de dados de " + quantidade + " linhas");
         this.quantidade = quantidade;
         this.listaFilmes = new ArrayList<>();
         lerArquivo();
@@ -38,7 +39,7 @@ public class AnaliseDados {
     }
     
     private void lerArquivo(){
-        this.arquivo = new File("ratingsTRATADO.csv");
+        this.arquivo = new File("C:\\Users\\miche\\Downloads\\ratingsTRATADO.csv");
         try (FileInputStream fi = new FileInputStream(this.arquivo)) {
             BufferedInputStream bis = new BufferedInputStream(fi);
             BufferedReader reader = new BufferedReader(new InputStreamReader(bis));
@@ -57,7 +58,7 @@ public class AnaliseDados {
             Collections.shuffle(numAleatorios);
             numAleatorios = numAleatorios.subList(0, quantidade);
             
-            Collections.sort(numAleatorios);
+            Collections.sort(numAleatorios); //apagar e usar metodos de ordenacao
             
             int valorLinha = 1;
             String partes[];           
@@ -67,8 +68,8 @@ public class AnaliseDados {
                 } else if(valorLinha==numAleatorios.get(0)){
                     partes = linha.split(";");
                     int id = Integer.parseInt(partes[0]);
-                    int idFilme = Integer.parseInt(partes[0]);;
-                    double avaliacao = Double.parseDouble(partes[0]);;
+                    int idFilme = Integer.parseInt(partes[1]);;
+                    double avaliacao = Double.parseDouble(partes[2]);;
                     Filme filme = new Filme(id,idFilme,avaliacao);
                     int index = verificaFilme(filme);
                     if(index==-1){
@@ -80,12 +81,9 @@ public class AnaliseDados {
                     
                     numAleatorios.remove(0);
                 }
+                valorLinha++;
             }
-            
-            for(int i=0;i<quantidade;i++){
-                System.out.println(listaFilmes.get(i).getIdFilme());
-            }
-            
+
             
             /*
             while((linha = reader.readLine())!=null){
@@ -97,6 +95,7 @@ public class AnaliseDados {
         } 
         catch (Exception ex){
             System.err.println("Erro");
+            System.err.println(ex.toString());
         }
     }
     
@@ -110,4 +109,12 @@ public class AnaliseDados {
         return -1;
     }
     
+    
+    public void imprimeLista(){
+                    
+            for(int i=0;i<quantidade;i++){
+                System.out.println(listaFilmes.get(i).getIdFilme() + " " + listaFilmes.get(i).getAvaliacao());
+            }
+            
+    }
 }

@@ -39,7 +39,20 @@ public class TrabalhoEd2 {
         }   
         ///////////////////////////////////////////////////////
        
-        AnaliseDados ad = new AnaliseDados(5000);
+        
+        AnaliseDados ad ;
+                for(int i=0;i<5;i++){
+                    System.out.println("Rodando semente "+ (i+1));                
+                    ad= new AnaliseDados(1000);
+                    ad= new AnaliseDados(5000);
+                    ad= new AnaliseDados(10000);
+                    ad= new AnaliseDados(50000);
+                    ad= new AnaliseDados(100000);
+                    ad= new AnaliseDados(500000);
+                    
+                }
+                
+        
         
         /*
         try(FileReader fr = new FileReader(arquivo2)){
