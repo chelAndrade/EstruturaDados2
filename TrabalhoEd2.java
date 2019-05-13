@@ -5,6 +5,10 @@
  */
 package trabalho.ed2;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author miche
@@ -15,8 +19,17 @@ public class TrabalhoEd2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        
+        File arquivo = new File("ratingsTRATADO.xml");
+        try (FileReader fr = new FileReader(arquivo)) {
+            int c = fr.read();
+            while (c != -1) {
+                System.out.print((char) c);
+                c = fr.read();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
     
 }
