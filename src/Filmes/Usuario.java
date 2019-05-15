@@ -12,6 +12,10 @@ public class Usuario {
     private double avaliacaoMedia = 0;
     private ListaEncadeada <Avaliacao> listaAvaliacao;
    
+    public Usuario(){
+        
+    }
+    
     public Usuario(int id, int idUsuario, double avaliacao, double tempo) {      
         this.idUsuario = idUsuario;
         Avaliacao av = new Avaliacao(id,avaliacao, tempo);

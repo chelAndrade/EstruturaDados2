@@ -5,10 +5,12 @@
  */
 package LeituraArquivo;
 
+import Algoritmos.AlgoritmosHash;
 import Algoritmos.AlgoritmosOrdenacao;
 import Algoritmos.ListaEncadeada;
 import Filmes.Avaliacao;
 import Filmes.Usuario;
+import Relatorio.RelatorioHash;
 import Relatorio.RelatorioOrdenacao;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -28,6 +30,7 @@ import java.util.List;
  * @author ice
  */
 public class AnaliseDados {
+
     private int quantidade;
     private int semente;
     private ListaEncadeada<Usuario> listaUsuarios;
@@ -38,15 +41,15 @@ public class AnaliseDados {
         this.quantidade = quantidade;
         this.listaUsuarios = new ListaEncadeada<>();
         this.semente = semente;
-        lerArquivo(arquivo);
+        this.arquivo = arquivo;
     }
 
     public int getQuantidade() {
         return quantidade;
     }
 
-    private void lerArquivo(File arquivo) {
-        this.arquivo = arquivo;
+    private void lerArquivo() {
+        //this.arquivo = arquivo;
         try (FileInputStream fi = new FileInputStream(this.arquivo)) {
             BufferedInputStream bis = new BufferedInputStream(fi);
             BufferedReader reader = new BufferedReader(new InputStreamReader(bis));
@@ -100,7 +103,7 @@ public class AnaliseDados {
                 System.out.println(linha);
             }
              */
-            executaOrdenacoes();
+            //executaOrdenacoes();
         } catch (FileNotFoundException ex) {
             System.err.println("Erro ao ler o arquivo!");
         } catch (Exception ex) {
@@ -126,28 +129,70 @@ public class AnaliseDados {
 
     }
 
-    private void executaOrdenacoes() {
-        
+    public void executaOrdenacao() {
+        lerArquivo();
+        executaAlgoritmoOrdenacao();
+    }
+
+    public void executaHash() {
+        lerArquivo();
+        executaAlgoritmoHash();
+    }
+
+    private void executaAlgoritmoHash() {
         ListaEncadeada<Usuario> aux = new ListaEncadeada<>();
-        
+
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
+        }
+        AlgoritmosHash.sondagemLinear(listaUsuarios, new RelatorioHash(semente, quantidade, "Sondagem Linear"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
+        }
+        AlgoritmosHash.sondagemQuadratica(listaUsuarios, new RelatorioHash(semente, quantidade, "Sondagem Quadratica"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
+        }
+        AlgoritmosHash.duploHashing(listaUsuarios, new RelatorioHash(semente, quantidade, "Duplo Hashing"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
+        }
+        AlgoritmosHash.encadeamentoSeparado(listaUsuarios, new RelatorioHash(semente, quantidade, "Encadeamento Separado"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
+        }
+        AlgoritmosHash.encadeamentoCoalescido(listaUsuarios, new RelatorioHash(semente, quantidade, "Encadeamento Coalescido"));
+    }
+
+    private void executaAlgoritmoOrdenacao() {
+
+        ListaEncadeada<Usuario> aux = new ListaEncadeada<>();
+
         for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
             aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
         AlgoritmosOrdenacao.bubbleSort(listaUsuarios, new RelatorioOrdenacao(semente, quantidade, "BubbleSort"));
-        
+
         aux = new ListaEncadeada<>();
         for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
             aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
         AlgoritmosOrdenacao.quickSortRec(listaUsuarios, new RelatorioOrdenacao(semente, quantidade, "QuickSort Recursivo"));
-        
 
         aux = new ListaEncadeada<>();
         for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
             aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
         AlgoritmosOrdenacao.quicksortMedianaK(listaUsuarios, 3, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 3"));
-        
+
         aux = new ListaEncadeada<>();
         for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
             aux.insereFinal(listaUsuarios.retornaInfo(i));
@@ -170,19 +215,19 @@ public class AnaliseDados {
         for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
             aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.insertionSort(listaUsuarios,  new RelatorioOrdenacao(semente, quantidade, "InsertionSort"));
+        AlgoritmosOrdenacao.insertionSort(listaUsuarios, new RelatorioOrdenacao(semente, quantidade, "InsertionSort"));
 
         aux = new ListaEncadeada<>();
         for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
             aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.mergeSort(listaUsuarios,  new RelatorioOrdenacao(semente, quantidade, "MergeSort"));
+        AlgoritmosOrdenacao.mergeSort(listaUsuarios, new RelatorioOrdenacao(semente, quantidade, "MergeSort"));
 
         aux = new ListaEncadeada<>();
         for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
             aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.heapSort(listaUsuarios,  new RelatorioOrdenacao(semente, quantidade, "HeapSort"));
+        AlgoritmosOrdenacao.heapSort(listaUsuarios, new RelatorioOrdenacao(semente, quantidade, "HeapSort"));
 
         aux = new ListaEncadeada<>();
         for (int i = 0; i < listaUsuarios.getTamanho(); i++) {

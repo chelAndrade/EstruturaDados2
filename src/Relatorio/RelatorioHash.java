@@ -42,6 +42,10 @@ public class RelatorioHash {
     public void incrementaColisoes() {
         this.colisoes++;
     }
+    
+    public void incrementaComparacao(){
+        this.comparacao++;
+    }
 
     public int getComparacao() {
         return comparacao;
@@ -61,7 +65,7 @@ public class RelatorioHash {
         try {
             //Parametros da criacao do arquivo texto
             new File(caminho).mkdirs();
-            File arquivo = new File(caminho + "Saida" + ".csv");
+            File arquivo = new File(caminho + "SaidaHash" + ".csv");
             FileWriter arq = new FileWriter(arquivo, true);
             PrintWriter gravarArq = new PrintWriter(arq);
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

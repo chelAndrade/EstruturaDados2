@@ -27,62 +27,150 @@ public class TrabalhoEd2 {
      * @param args the command line arguments
      */
     private static File arquivo;
-    
+
     public static void main(String[] args) {
         // TODO code application logic here
-       // menuPrincipal();
-        AnaliseDados ad;
-        lerArquivo();
-        
+        // menuPrincipal();
+
+        menuPrincipal();
+
         //Ordenacao
-        for (int i = 0; i < 5; i++) {
-            System.out.println("Rodando semente " + (i + 1));
-            ad = new AnaliseDados(1000,arquivo, i+1 );
-            ad = new AnaliseDados(5000,arquivo, i+1 );
-            ad = new AnaliseDados(10000,arquivo, i+1 );
-            ad = new AnaliseDados(50000,arquivo, i+1 );
-            ad = new AnaliseDados(100000,arquivo, i+1 );
-            ad = new AnaliseDados(500000,arquivo, i+1 );
-            ad = new AnaliseDados(1000000,arquivo, i+1 );
-        }
+        /*
+  
 
         //Hash
-        
+  
+         */
         System.out.println("Execução Terminada");
     }
-    
-    private static void lerArquivo(){
+
+    private static void lerArquivo() {
         String caminho;
         Scanner sc = new Scanner(System.in);
         System.out.println("Digite o caminho e o nome do arquivo: ");
         caminho = sc.nextLine();
         arquivo = new File(caminho);
-    }  
-    
-    private static void menuPrincipal(){
+    }
+
+    private static void menuPrincipal() {
         int x = 1;
         Scanner scanner = new Scanner(System.in);
         System.out.println("------------Menu------------");
         System.out.println("1 - Abrir arquivo");
-        System.out.println("2 - Sair");
+        System.out.println("");
+        System.out.println("0 - Sair");
         System.out.println("----------------------------");
-        while (x!=0){         
-            try{
+        while (x != 0) {
+            try {
                 x = scanner.nextInt();
-            } catch (Exception ex){
-                x = -1;
+                switch (x) {
+                    case 1:
+                        lerArquivo();
+                        menu2();
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Digite um valor válido!");
+                        x = -1;
+                    // break;
+                }
+            } catch (Exception ex) {
+
                 System.out.println("Digite um valor válido!");
-                
+                scanner = new Scanner(System.in);
+                //x = scanner.nextInt();
             }
-            
-            switch(x){
-                case 1:
-                    break;
-                default:
-                    System.out.println("Digite um valor válido!");
-                   // break;
-            }
-            
+
         }
+    }
+
+    private static void menu2() {
+        int x = 1;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("------------Menu------------");
+        System.out.println("Arquivo: "+ arquivo.getAbsolutePath());
+        System.out.println("1 - Abrir outro arquivo");
+        System.out.println("2 - Gerar Ordenações para Relatório");
+        System.out.println("3 - Gerar Hash para Relatório");
+        System.out.println();
+        System.out.println("0 - Sair");
+        System.out.println("----------------------------");
+        while (x != 0) {
+            try {
+                x = scanner.nextInt();
+                switch (x) {
+                    case 1:
+                        lerArquivo();
+                        break;
+                    case 2:
+                        executarOrdenacao();
+                        break;
+                    case 3:
+                        executarHash();
+                        break;
+                    case 0:
+                        System.exit(0);
+                        break;
+                    default:
+                        System.out.println("Digite um valor válido!");
+                        x = -1;
+                     break;
+                }
+            } catch (Exception ex) {
+
+                System.out.println("Digite um valor válido!");
+                scanner = new Scanner(System.in);
+                //x = scanner.nextInt();
+            }
+
+        }
+    }
+
+    public static void executarOrdenacao() {
+        AnaliseDados ad;
+        System.out.println("Iniciando Ordenações");
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Rodando semente " + (i + 1));
+            ad = new AnaliseDados(1000, arquivo, i + 1);
+            ad.executaOrdenacao();
+            ad = new AnaliseDados(5000, arquivo, i + 1);
+            ad.executaOrdenacao();
+            ad = new AnaliseDados(10000, arquivo, i + 1);
+            ad.executaOrdenacao();
+            ad = new AnaliseDados(50000, arquivo, i + 1);
+            ad.executaOrdenacao();
+            ad = new AnaliseDados(100000, arquivo, i + 1);
+            ad.executaOrdenacao();
+            ad = new AnaliseDados(500000, arquivo, i + 1);
+            ad.executaOrdenacao();
+            ad = new AnaliseDados(1000000, arquivo, i + 1);
+            ad.executaOrdenacao();
+        }
+        System.out.println("Ordenações Terminadas");
+    }
+
+    public static void executarHash() {
+        AnaliseDados ad;
+        System.out.println("Iniciando Hash");
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Rodando semente " + (i + 1));
+            ad = new AnaliseDados(1000, arquivo, i + 1);
+            ad.executaHash();
+            ad = new AnaliseDados(5000, arquivo, i + 1);
+            ad.executaHash();
+            ad = new AnaliseDados(10000, arquivo, i + 1);
+            ad.executaHash();
+            ad = new AnaliseDados(50000, arquivo, i + 1);
+            ad.executaHash();
+            ad = new AnaliseDados(100000, arquivo, i + 1);
+            ad.executaHash();
+            ad = new AnaliseDados(500000, arquivo, i + 1);
+            ad.executaHash();
+            ad = new AnaliseDados(1000000, arquivo, i + 1);
+            ad.executaHash();
+
+        }
+        System.out.println("Hash Terminado");
     }
 }
