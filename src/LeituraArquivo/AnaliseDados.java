@@ -122,13 +122,14 @@ public class AnaliseDados {
         } else if (usuario.getIdUsuario() == listaUsuarios.retornaFim().getIdUsuario()) {
             return (listaUsuarios.getTamanho() - 1);
         } else {
-            
+
+            /*
             for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
                 if (usuario.getIdUsuario() == listaUsuarios.retornaInfo(i).getIdUsuario()) {
                     return i;
                 }
             }
-             
+            */
             return -1;
         }
     }
@@ -152,6 +153,18 @@ public class AnaliseDados {
     }
 
     private void executaAlgoritmoHash() {
+        System.out.println("Executando Algoritmo de Hash");
+        System.out.println("Executando Sondagem Linear");
+        AlgoritmosHash.sondagemLinear(listaUsuarios, new RelatorioHash(semente, quantidade, "Sondagem Linear"));
+        System.out.println("Executando Sondagem Quadratica");
+        AlgoritmosHash.sondagemQuadratica(listaUsuarios, new RelatorioHash(semente, quantidade, "Sondagem Quadratica"));
+        System.out.println("Executando Duplo Hashing");
+        AlgoritmosHash.duploHashing(listaUsuarios, new RelatorioHash(semente, quantidade, "Duplo Hashing"));
+        System.out.println("Executando Encadeamento Separado");
+        AlgoritmosHash.encadeamentoSeparado(listaUsuarios, new RelatorioHash(semente, quantidade, "Encadeamento Separado"));
+        System.out.println("Executando Encadeamento Coalescido");
+        AlgoritmosHash.encadeamentoCoalescido(listaUsuarios, new RelatorioHash(semente, quantidade, "Encadeamento Coalescido"));
+        /*
         ListaEncadeada<Usuario> aux = new ListaEncadeada<>();
 
         No no = listaUsuarios.getInicio();
@@ -198,112 +211,113 @@ public class AnaliseDados {
             no = no.getProximo();
         }
         AlgoritmosHash.encadeamentoCoalescido(listaUsuarios, new RelatorioHash(semente, quantidade, "Encadeamento Coalescido"));
+         */
     }
 
     private void executaAlgoritmoOrdenacao() {
 
-        try{
-        System.out.println("Executando Ordenação");
-        ListaCont aux = new ListaCont(listaUsuarios.getTamanho());
-        No no = listaUsuarios.getInicio();
-        
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.bubbleSort(aux, new RelatorioOrdenacao(semente, quantidade, "BubbleSort"));
-         
-        aux.deletarLista();
-        no = listaUsuarios.getInicio();        
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.bubbleSort(aux, new RelatorioOrdenacao(semente, quantidade, "BubbleSort"));
+        try {
+            System.out.println("Executando Ordenação");
+            ListaCont aux = new ListaCont(listaUsuarios.getTamanho());
+            No no = listaUsuarios.getInicio();
 
-        aux.deletarLista();       
-        no = listaUsuarios.getInicio();
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.quickSortRec(aux, new RelatorioOrdenacao(semente, quantidade, "QuickSort Recursivo"));
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.bubbleSort(aux, new RelatorioOrdenacao(semente, quantidade, "BubbleSort"));
 
-        aux.deletarLista();
-         
-        no = listaUsuarios.getInicio();
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.quicksortMedianaK(aux, 3, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 3"));
+            aux.deletarLista();
+            no = listaUsuarios.getInicio();
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.bubbleSort(aux, new RelatorioOrdenacao(semente, quantidade, "BubbleSort"));
 
-        aux.deletarLista();
-         
-        no = listaUsuarios.getInicio();
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.quicksortMedianaK(aux, 5, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 5"));
+            aux.deletarLista();
+            no = listaUsuarios.getInicio();
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.quickSortRec(aux, new RelatorioOrdenacao(semente, quantidade, "QuickSort Recursivo"));
 
-        aux.deletarLista();
-         
-        no = listaUsuarios.getInicio();
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.quickSortHibrido(aux, 10, new RelatorioOrdenacao(semente, quantidade, "QuickSort Hibrido 10"));
+            aux.deletarLista();
 
-        aux.deletarLista();
-         
-        no = listaUsuarios.getInicio();
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.quickSortHibrido(aux, 100, new RelatorioOrdenacao(semente, quantidade, "QuickSort Hibrido 100"));
+            no = listaUsuarios.getInicio();
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.quicksortMedianaK(aux, 3, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 3"));
 
-        aux.deletarLista();
-         
-        no = listaUsuarios.getInicio();
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.insertionSort(aux, new RelatorioOrdenacao(semente, quantidade, "InsertionSort"));
+            aux.deletarLista();
 
-        aux.deletarLista();
-         
-        no = listaUsuarios.getInicio();
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.mergeSort(aux, new RelatorioOrdenacao(semente, quantidade, "MergeSort"));
+            no = listaUsuarios.getInicio();
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.quicksortMedianaK(aux, 5, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 5"));
 
-        aux.deletarLista();
-         
-        no = listaUsuarios.getInicio();
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.heapSort(aux, new RelatorioOrdenacao(semente, quantidade, "HeapSort"));
+            aux.deletarLista();
 
-        aux.deletarLista();
-         
-        no = listaUsuarios.getInicio();
-        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
-            aux.insereFinal((Usuario) no.getObjeto());
-            no = no.getProximo();
-        }
-         AlgoritmosOrdenacaoVetor.shellSort(aux, new RelatorioOrdenacao(semente, quantidade, "ShellSort"));
-        
-        } catch (Exception e){
+            no = listaUsuarios.getInicio();
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.quickSortHibrido(aux, 10, new RelatorioOrdenacao(semente, quantidade, "QuickSort Hibrido 10"));
+
+            aux.deletarLista();
+
+            no = listaUsuarios.getInicio();
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.quickSortHibrido(aux, 100, new RelatorioOrdenacao(semente, quantidade, "QuickSort Hibrido 100"));
+
+            aux.deletarLista();
+
+            no = listaUsuarios.getInicio();
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.insertionSort(aux, new RelatorioOrdenacao(semente, quantidade, "InsertionSort"));
+
+            aux.deletarLista();
+
+            no = listaUsuarios.getInicio();
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.mergeSort(aux, new RelatorioOrdenacao(semente, quantidade, "MergeSort"));
+
+            aux.deletarLista();
+
+            no = listaUsuarios.getInicio();
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.heapSort(aux, new RelatorioOrdenacao(semente, quantidade, "HeapSort"));
+
+            aux.deletarLista();
+
+            no = listaUsuarios.getInicio();
+            for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+                aux.insereFinal((Usuario) no.getObjeto());
+                no = no.getProximo();
+            }
+            AlgoritmosOrdenacaoVetor.shellSort(aux, new RelatorioOrdenacao(semente, quantidade, "ShellSort"));
+
+        } catch (Exception e) {
             System.err.println(e.toString());
         }
-       
+
     }
 }

@@ -149,7 +149,6 @@ public class TrabalhoEd2 {
             ad.executaOrdenacao();
             ad = new AnaliseDados(10000, arquivo, i + 1);
             ad.executaOrdenacao();
-            /*
             ad = new AnaliseDados(50000, arquivo, i + 1);
             ad.executaOrdenacao();  
             ad = new AnaliseDados(100000, arquivo, i + 1);
@@ -157,9 +156,7 @@ public class TrabalhoEd2 {
             ad = new AnaliseDados(500000, arquivo, i + 1);
             ad.executaOrdenacao();
             ad = new AnaliseDados(1000000, arquivo, i + 1);
-            ad.executaOrdenacao();
-*/
-            
+            ad.executaOrdenacao();           
         }
         System.out.println("Ordenações Terminadas");
     }
