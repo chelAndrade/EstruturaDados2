@@ -1,7 +1,7 @@
 package Algoritmos;
 
 
-import Relatorio.Relatorio;
+import Relatorio.RelatorioOrdenacao;
 import java.io.Serializable;
 //import trabalhoed2.Deputado;
 /**
@@ -334,7 +334,7 @@ public class ListaEncadeada<Class> implements Serializable {
      * @param index2 Outra posicao onde deve ocorrer a troca
      * @param relatorio Acesso ao relatorio para gravar os dados de analise
      */
-    public void troca(int index1, int index2, Relatorio relatorio) {
+    public void troca(int index1, int index2, RelatorioOrdenacao relatorio) {
         Class aux;
         No no1;
         No no2;
@@ -385,7 +385,7 @@ public class ListaEncadeada<Class> implements Serializable {
 
         no1.setObjeto((Class) no2.getObjeto());
         no2.setObjeto(aux);
-        relatorio.incrementaTrocaColisaoCopia();
+        relatorio.incrementaCopia();
     }
     /**
      * Remove todos os itens da Lista

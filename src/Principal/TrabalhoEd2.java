@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 /**
  *
@@ -25,48 +26,59 @@ public class TrabalhoEd2 {
     /**
      * @param args the command line arguments
      */
+    private static File arquivo;
+    
     public static void main(String[] args) {
         // TODO code application logic here
+       // menuPrincipal();
+        AnaliseDados ad;
+        lerArquivo();
         
-        
-        ////////////////// Criar arquivo ///////////////////////
-        File arquivo = new File("teste.txt");
-        try(FileWriter fw = new FileWriter(arquivo)){
-            fw.write("34");            
-            fw.flush();            
-        }catch(IOException ex){
-            ex.printStackTrace();
-        }   
-        ///////////////////////////////////////////////////////
-       
-        
-        AnaliseDados ad ;
-                for(int i=0;i<5;i++){
-                    System.out.println("Rodando semente "+ (i+1));                
-                    ad= new AnaliseDados(1000);
-                    ad= new AnaliseDados(5000);
-                    ad= new AnaliseDados(10000);
-                    ad= new AnaliseDados(50000);
-                    ad= new AnaliseDados(100000);
-                    ad= new AnaliseDados(500000);
-                    
-                }
+        for (int i = 0; i < 1; i++) {
+            System.out.println("Rodando semente " + (i + 1));
+            ad = new AnaliseDados(1000,arquivo, i+1 );
+            ad = new AnaliseDados(5000,arquivo, i+1 );
+            ad = new AnaliseDados(10000,arquivo, i+1 );
+            ad = new AnaliseDados(50000,arquivo, i+1 );
+            ad = new AnaliseDados(100000,arquivo, i+1 );
+            ad = new AnaliseDados(500000,arquivo, i+1 );
+        }
+
+        System.out.println("Execução Terminada");
+    }
+    
+    private static void lerArquivo(){
+        String caminho;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Digite o caminho e o nome do arquivo: ");
+        caminho = sc.nextLine();
+        arquivo = new File(caminho);
+    }  
+    
+    private static void menuPrincipal(){
+        int x = 1;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("------------Menu------------");
+        System.out.println("1 - Abrir arquivo");
+        System.out.println("2 - Sair");
+        System.out.println("----------------------------");
+        while (x!=0){         
+            try{
+                x = scanner.nextInt();
+            } catch (Exception ex){
+                x = -1;
+                System.out.println("Digite um valor válido!");
                 
-        
-        
-        /*
-        try(FileReader fr = new FileReader(arquivo2)){
-            int c = fr.read();
-            while(c != -1){
-                System.out.println((char) c);
-                c = fr.read();
             }
-        }catch(IOException ex){
-            ex.printStackTrace();
-        } */
-       
-        
+            
+            switch(x){
+                case 1:
+                    break;
+                default:
+                    System.out.println("Digite um valor válido!");
+                   // break;
+            }
+            
+        }
     }
 }
-    
-

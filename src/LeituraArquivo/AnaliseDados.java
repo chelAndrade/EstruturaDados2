@@ -5,11 +5,17 @@
  */
 package LeituraArquivo;
 
-import Filmes.Filme;
+import Algoritmos.AlgoritmosOrdenacao;
+import Algoritmos.ListaEncadeada;
+import Filmes.Avaliacao;
+import Filmes.Usuario;
+import Relatorio.Relatorio;
+import Relatorio.RelatorioOrdenacao;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,98 +29,164 @@ import java.util.List;
  * @author ice
  */
 public class AnaliseDados {
+
     private int quantidade;
-    private List<Filme> listaFilmes;
+    private int semente;
+    private ListaEncadeada<Usuario> listaFilmes;
     private File arquivo;
 
-    public AnaliseDados(int quantidade) {
+    public AnaliseDados(int quantidade, File arquivo, int semente) {
         System.out.println("Criando Analise de dados de " + quantidade + " linhas");
         this.quantidade = quantidade;
-        this.listaFilmes = new ArrayList<>();
-        lerArquivo();
+        this.listaFilmes = new ListaEncadeada<>();
+        this.semente = semente;
+        lerArquivo(arquivo);
     }
 
     public int getQuantidade() {
         return quantidade;
     }
-    
-    private void lerArquivo(){
-        this.arquivo = new File("C:\\Users\\miche\\Downloads\\ratingsTRATADO.csv");
+
+    private void lerArquivo(File arquivo) {
+        this.arquivo = arquivo;
         try (FileInputStream fi = new FileInputStream(this.arquivo)) {
             BufferedInputStream bis = new BufferedInputStream(fi);
             BufferedReader reader = new BufferedReader(new InputStreamReader(bis));
             String linha = reader.readLine();
-            
+
             LineNumberReader linhaLeitura = new LineNumberReader(new FileReader(arquivo));
             linhaLeitura.skip(arquivo.length());
             int totalLinhas = linhaLeitura.getLineNumber();
-            
+
             List<Integer> numAleatorios = new ArrayList<>();
-            
+
             for (int i = 1; i < totalLinhas; i++) {
                 numAleatorios.add(i);
             }
-            
+
             Collections.shuffle(numAleatorios);
             numAleatorios = numAleatorios.subList(0, quantidade);
-            
-            Collections.sort(numAleatorios); //apagar e usar metodos de ordenacao
-            
+
+            AlgoritmosOrdenacao.bubbleSortArrayListInteiro(numAleatorios); //apagar e usar metodos de ordenacao
+
             int valorLinha = 1;
-            String partes[];           
-            while((linha = reader.readLine())!=null){
-                if(numAleatorios.size()==0){
+            String partes[];
+            while ((linha = reader.readLine()) != null) {
+                if (numAleatorios.size() == 0) {
                     break;
-                } else if(valorLinha==numAleatorios.get(0)){
+                } else if (valorLinha == numAleatorios.get(0)) {
                     partes = linha.split(";");
+                    if (partes.length < 2) {
+                        partes = linha.split(",");
+
+                    }
                     int id = Integer.parseInt(partes[0]);
                     int idFilme = Integer.parseInt(partes[1]);;
                     double avaliacao = Double.parseDouble(partes[2]);;
-                    Filme filme = new Filme(id,idFilme,avaliacao);
+                    Usuario filme = new Usuario(id, idFilme, avaliacao);
                     int index = verificaFilme(filme);
-                    if(index==-1){
-                        this.listaFilmes.add(filme);
+                    if (index == -1) {
+                        this.listaFilmes.insereFinal(filme);
                     } else {
-                        this.listaFilmes.get(index).addAvaliacao(avaliacao);
-                        this.listaFilmes.get(index).addUsuario(id);
+                        Avaliacao av = new Avaliacao(id, avaliacao);
+                        this.listaFilmes.retornaInfo(index).addAvaliacao(av);
                     }
-                    
                     numAleatorios.remove(0);
                 }
                 valorLinha++;
             }
 
-            
             /*
             while((linha = reader.readLine())!=null){
                 System.out.println(linha);
             }
-*/
-        }catch(IOException ex){
+             */
+            executaOrdenacoes();
+        } catch (FileNotFoundException ex) {
             System.err.println("Erro ao ler o arquivo!");
-        } 
-        catch (Exception ex){
+        } catch (Exception ex) {
             System.err.println("Erro");
             System.err.println(ex.toString());
         }
     }
-    
-    
-    private int verificaFilme(Filme filme){
-        for(int i=0;i<listaFilmes.size();i++){
-            if(filme.getIdFilme()==listaFilmes.get(i).getIdFilme()){
+
+    private int verificaFilme(Usuario filme) {
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            if (filme.getIdFilme() == listaFilmes.retornaInfo(i).getIdFilme()) {
                 return i;
             }
         }
         return -1;
     }
-    
-    
-    public void imprimeLista(){
-                    
-            for(int i=0;i<quantidade;i++){
-                System.out.println(listaFilmes.get(i).getIdFilme() + " " + listaFilmes.get(i).getAvaliacao());
-            }
-            
+
+    public void imprimeLista() {
+
+        for (int i = 0; i < quantidade; i++) {
+            System.out.println(listaFilmes.retornaInfo(i).getIdFilme() + " " + listaFilmes.retornaInfo(i).getAvaliacaoMedia());
+        }
+
+    }
+
+    private void executaOrdenacoes() {
+        ListaEncadeada<Usuario> aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            aux.insereFinal(listaFilmes.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.bubbleSort(listaFilmes, new RelatorioOrdenacao(semente, quantidade, "BubbleSort"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            aux.insereFinal(listaFilmes.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.quickSortRec(listaFilmes, new RelatorioOrdenacao(semente, quantidade, "QuickSort Recursivo"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            aux.insereFinal(listaFilmes.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.quicksortMedianaK(listaFilmes, 3, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 3"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            aux.insereFinal(listaFilmes.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.quicksortMedianaK(listaFilmes, 5, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 5"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            aux.insereFinal(listaFilmes.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.quickSortHibrido(listaFilmes, 10, new RelatorioOrdenacao(semente, quantidade, "QuickSort Hibrido 10"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            aux.insereFinal(listaFilmes.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.quickSortHibrido(listaFilmes, 100, new RelatorioOrdenacao(semente, quantidade, "QuickSort Hibrido 100"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            aux.insereFinal(listaFilmes.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.insertionSort(listaFilmes,  new RelatorioOrdenacao(semente, quantidade, "InsertionSort"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            aux.insereFinal(listaFilmes.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.mergeSort(listaFilmes,  new RelatorioOrdenacao(semente, quantidade, "MergeSort"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            aux.insereFinal(listaFilmes.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.heapSort(listaFilmes,  new RelatorioOrdenacao(semente, quantidade, "HeapSort"));
+
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
+            aux.insereFinal(listaFilmes.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.shellSort(listaFilmes, new RelatorioOrdenacao(semente, quantidade, "ShellSort"));
+
     }
 }
