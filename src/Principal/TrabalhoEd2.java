@@ -73,6 +73,11 @@ public class TrabalhoEd2 {
                     default:
                         System.out.println("Digite um valor válido!");
                         x = -1;
+                        System.out.println("------------Menu------------");
+                        System.out.println("1 - Abrir arquivo");
+                        System.out.println("");
+                        System.out.println("0 - Sair");
+                        System.out.println("----------------------------");
                     // break;
                 }
             } catch (Exception ex) {
@@ -88,20 +93,14 @@ public class TrabalhoEd2 {
     private static void menu2() {
         int x = 1;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("------------Menu------------");
-        System.out.println("Arquivo: "+ arquivo.getAbsolutePath());
-        System.out.println("1 - Abrir outro arquivo");
-        System.out.println("2 - Gerar Ordenações para Relatório");
-        System.out.println("3 - Gerar Hash para Relatório");
-        System.out.println();
-        System.out.println("0 - Sair");
-        System.out.println("----------------------------");
+        imprimeMenu2();
         while (x != 0) {
             try {
                 x = scanner.nextInt();
                 switch (x) {
                     case 1:
                         lerArquivo();
+                        imprimeMenu2();
                         break;
                     case 2:
                         executarOrdenacao();
@@ -115,7 +114,7 @@ public class TrabalhoEd2 {
                     default:
                         System.out.println("Digite um valor válido!");
                         x = -1;
-                     break;
+                        break;
                 }
             } catch (Exception ex) {
 
@@ -127,25 +126,40 @@ public class TrabalhoEd2 {
         }
     }
 
+    private static void imprimeMenu2() {
+        System.out.println("------------Menu------------");
+        System.out.println("Arquivo: " + arquivo.getAbsolutePath());
+        System.out.println("1 - Abrir outro arquivo");
+        System.out.println("2 - Gerar Ordenações para Relatório");
+        System.out.println("3 - Gerar Hash para Relatório");
+        System.out.println();
+        System.out.println("0 - Sair");
+        System.out.println("----------------------------");
+    }
+
     public static void executarOrdenacao() {
         AnaliseDados ad;
         System.out.println("Iniciando Ordenações");
         for (int i = 0; i < 5; i++) {
             System.out.println("Rodando semente " + (i + 1));
+            
             ad = new AnaliseDados(1000, arquivo, i + 1);
             ad.executaOrdenacao();
             ad = new AnaliseDados(5000, arquivo, i + 1);
             ad.executaOrdenacao();
             ad = new AnaliseDados(10000, arquivo, i + 1);
             ad.executaOrdenacao();
+            /*
             ad = new AnaliseDados(50000, arquivo, i + 1);
-            ad.executaOrdenacao();
+            ad.executaOrdenacao();  
             ad = new AnaliseDados(100000, arquivo, i + 1);
             ad.executaOrdenacao();
             ad = new AnaliseDados(500000, arquivo, i + 1);
             ad.executaOrdenacao();
             ad = new AnaliseDados(1000000, arquivo, i + 1);
             ad.executaOrdenacao();
+*/
+            
         }
         System.out.println("Ordenações Terminadas");
     }

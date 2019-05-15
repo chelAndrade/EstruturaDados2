@@ -26,8 +26,8 @@ public class RelatorioOrdenacao {
     private Calendar dataInicio;
     private long tempoInicio;
     private long tempoFim;
-    private int comparacao;
-    private int copia;
+    private long comparacao;
+    private long copia;
 
     public RelatorioOrdenacao(int semente, int n, String nomeOrdenacao) {
         this.semente = semente;
@@ -43,11 +43,11 @@ public class RelatorioOrdenacao {
         this.copia++;
     }
 
-    public int getComparacao() {
+    public long getComparacao() {
         return comparacao;
     }
 
-    public void setComparacao(int comparacao) {
+    public void setComparacao(long comparacao) {
         this.comparacao = comparacao;
     }
 

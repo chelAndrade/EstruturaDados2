@@ -26,8 +26,8 @@ public class RelatorioHash {
     private Calendar dataInicio;
     private long tempoInicio;
     private long tempoFim;
-    private int comparacao;
-    private int colisoes;
+    private long comparacao;
+    private long colisoes;
 
     public RelatorioHash(int semente, int n, String nomeOrdenacao) {
         this.semente = semente;
@@ -47,11 +47,11 @@ public class RelatorioHash {
         this.comparacao++;
     }
 
-    public int getComparacao() {
+    public long getComparacao() {
         return comparacao;
     }
 
-    public void setComparacao(int comparacao) {
+    public void setComparacao(long comparacao) {
         this.comparacao = comparacao;
     }
 
