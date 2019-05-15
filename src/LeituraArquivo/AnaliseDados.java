@@ -30,13 +30,13 @@ import java.util.List;
 public class AnaliseDados {
     private int quantidade;
     private int semente;
-    private ListaEncadeada<Usuario> listaFilmes;
+    private ListaEncadeada<Usuario> listaUsuarios;
     private File arquivo;
 
     public AnaliseDados(int quantidade, File arquivo, int semente) {
         System.out.println("Criando Analise de dados de " + quantidade + " linhas");
         this.quantidade = quantidade;
-        this.listaFilmes = new ListaEncadeada<>();
+        this.listaUsuarios = new ListaEncadeada<>();
         this.semente = semente;
         lerArquivo(arquivo);
     }
@@ -85,10 +85,10 @@ public class AnaliseDados {
                     Usuario usuario = new Usuario(id, idFilme, avaliacao, tempo);
                     int index = verificaFilme(usuario);
                     if (index == -1) {
-                        this.listaFilmes.insereFinal(usuario);
+                        this.listaUsuarios.insereFinal(usuario);
                     } else {
                         Avaliacao av = new Avaliacao(id, avaliacao, tempo);
-                        this.listaFilmes.retornaInfo(index).addAvaliacao(av);
+                        this.listaUsuarios.retornaInfo(index).addAvaliacao(av);
                     }
                     numAleatorios.remove(0);
                 }
@@ -110,8 +110,8 @@ public class AnaliseDados {
     }
 
     private int verificaFilme(Usuario usuario) {
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            if (usuario.getIdFilme() == listaFilmes.retornaInfo(i).getIdFilme()) {
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            if (usuario.getIdUsuario() == listaUsuarios.retornaInfo(i).getIdUsuario()) {
                 return i;
             }
         }
@@ -121,71 +121,74 @@ public class AnaliseDados {
     public void imprimeLista() {
 
         for (int i = 0; i < quantidade; i++) {
-            System.out.println(listaFilmes.retornaInfo(i).getIdFilme() + " " + listaFilmes.retornaInfo(i).getAvaliacaoMedia());
+            System.out.println(listaUsuarios.retornaInfo(i).getIdUsuario() + " " + listaUsuarios.retornaInfo(i).getAvaliacaoMedia());
         }
 
     }
 
     private void executaOrdenacoes() {
+        
         ListaEncadeada<Usuario> aux = new ListaEncadeada<>();
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            aux.insereFinal(listaFilmes.retornaInfo(i));
+        
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.bubbleSort(listaFilmes, new RelatorioOrdenacao(semente, quantidade, "BubbleSort"));
+        AlgoritmosOrdenacao.bubbleSort(listaUsuarios, new RelatorioOrdenacao(semente, quantidade, "BubbleSort"));
+        
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.quickSortRec(listaUsuarios, new RelatorioOrdenacao(semente, quantidade, "QuickSort Recursivo"));
+        
 
         aux = new ListaEncadeada<>();
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            aux.insereFinal(listaFilmes.retornaInfo(i));
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.quickSortRec(listaFilmes, new RelatorioOrdenacao(semente, quantidade, "QuickSort Recursivo"));
+        AlgoritmosOrdenacao.quicksortMedianaK(listaUsuarios, 3, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 3"));
+        
+        aux = new ListaEncadeada<>();
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
+        }
+        AlgoritmosOrdenacao.quicksortMedianaK(listaUsuarios, 5, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 5"));
 
         aux = new ListaEncadeada<>();
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            aux.insereFinal(listaFilmes.retornaInfo(i));
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.quicksortMedianaK(listaFilmes, 3, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 3"));
+        AlgoritmosOrdenacao.quickSortHibrido(listaUsuarios, 10, new RelatorioOrdenacao(semente, quantidade, "QuickSort Hibrido 10"));
 
         aux = new ListaEncadeada<>();
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            aux.insereFinal(listaFilmes.retornaInfo(i));
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.quicksortMedianaK(listaFilmes, 5, new RelatorioOrdenacao(semente, quantidade, "QuickSort Mediana 5"));
+        AlgoritmosOrdenacao.quickSortHibrido(listaUsuarios, 100, new RelatorioOrdenacao(semente, quantidade, "QuickSort Hibrido 100"));
 
         aux = new ListaEncadeada<>();
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            aux.insereFinal(listaFilmes.retornaInfo(i));
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.quickSortHibrido(listaFilmes, 10, new RelatorioOrdenacao(semente, quantidade, "QuickSort Hibrido 10"));
+        AlgoritmosOrdenacao.insertionSort(listaUsuarios,  new RelatorioOrdenacao(semente, quantidade, "InsertionSort"));
 
         aux = new ListaEncadeada<>();
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            aux.insereFinal(listaFilmes.retornaInfo(i));
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.quickSortHibrido(listaFilmes, 100, new RelatorioOrdenacao(semente, quantidade, "QuickSort Hibrido 100"));
+        AlgoritmosOrdenacao.mergeSort(listaUsuarios,  new RelatorioOrdenacao(semente, quantidade, "MergeSort"));
 
         aux = new ListaEncadeada<>();
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            aux.insereFinal(listaFilmes.retornaInfo(i));
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.insertionSort(listaFilmes,  new RelatorioOrdenacao(semente, quantidade, "InsertionSort"));
+        AlgoritmosOrdenacao.heapSort(listaUsuarios,  new RelatorioOrdenacao(semente, quantidade, "HeapSort"));
 
         aux = new ListaEncadeada<>();
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            aux.insereFinal(listaFilmes.retornaInfo(i));
+        for (int i = 0; i < listaUsuarios.getTamanho(); i++) {
+            aux.insereFinal(listaUsuarios.retornaInfo(i));
         }
-        AlgoritmosOrdenacao.mergeSort(listaFilmes,  new RelatorioOrdenacao(semente, quantidade, "MergeSort"));
-
-        aux = new ListaEncadeada<>();
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            aux.insereFinal(listaFilmes.retornaInfo(i));
-        }
-        AlgoritmosOrdenacao.heapSort(listaFilmes,  new RelatorioOrdenacao(semente, quantidade, "HeapSort"));
-
-        aux = new ListaEncadeada<>();
-        for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            aux.insereFinal(listaFilmes.retornaInfo(i));
-        }
-        AlgoritmosOrdenacao.shellSort(listaFilmes, new RelatorioOrdenacao(semente, quantidade, "ShellSort"));
+        AlgoritmosOrdenacao.shellSort(listaUsuarios, new RelatorioOrdenacao(semente, quantidade, "ShellSort"));
 
     }
 }

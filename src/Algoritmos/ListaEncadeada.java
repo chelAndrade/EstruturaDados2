@@ -397,4 +397,8 @@ public class ListaEncadeada<Class> implements Serializable {
             this.removeInicio();
         }
     }
+    
+    public Class get(int index){
+        return retornaInfo(index);
+    }
 }

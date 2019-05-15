@@ -8,12 +8,12 @@ import java.util.ArrayList;
  * @author miche
  */
 public class Usuario {
-    private int idFilme;
+    private int idUsuario;
     private double avaliacaoMedia = 0;
     private ListaEncadeada <Avaliacao> listaAvaliacao;
    
-    public Usuario(int id, int idFilme, double avaliacao, double tempo) {      
-        this.idFilme = idFilme;
+    public Usuario(int id, int idUsuario, double avaliacao, double tempo) {      
+        this.idUsuario = idUsuario;
         Avaliacao av = new Avaliacao(id,avaliacao, tempo);
         this.listaAvaliacao = new ListaEncadeada<>();
         this.listaAvaliacao.insereFinal(av);     
@@ -23,7 +23,7 @@ public class Usuario {
         this.listaAvaliacao.insereFinal(avaliacao);
     }
     
-    public int getQuantidadeUsuarios(){
+    public int getQuantidadeFilmes(){
         return listaAvaliacao.getTamanho();
     }
 
@@ -31,15 +31,15 @@ public class Usuario {
     /**
      * @return the filme
      */
-    public int getIdFilme() {
-        return idFilme;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
     /**
      * @param filme the filme to set
      */
-    public void setIdFilme(int idFilme) {
-        this.idFilme = idFilme;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
     
     public double getAvaliacaoMedia(){

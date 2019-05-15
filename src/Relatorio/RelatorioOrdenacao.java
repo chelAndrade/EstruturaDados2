@@ -20,14 +20,14 @@ import javax.swing.JOptionPane;
  */
 public class RelatorioOrdenacao {
 
-   private  int semente;
-  private   int n;
-   private  String nomeOrdenacao;
-   private Calendar dataInicio;
-  private   long tempoInicio;
-  private   long tempoFim;
+    private int semente;
+    private int n;
+    private String nomeOrdenacao;
+    private Calendar dataInicio;
+    private long tempoInicio;
+    private long tempoFim;
     private int comparacao;
-  private   int copia;
+    private int copia;
 
     public RelatorioOrdenacao(int semente, int n, String nomeOrdenacao) {
         this.semente = semente;
@@ -84,7 +84,7 @@ public class RelatorioOrdenacao {
             gravarArq.print(this.comparacao + ";");
             gravarArq.print(this.copia);
             gravarArq.println();
-            arq.close();           
+            arq.close();
         } catch (Exception e) {
             System.err.println("Erro");
             System.err.println(e.toString());

@@ -20,7 +20,7 @@ public class AlgoritmosOrdenacao {
             contComparacao++;
             for (int j = 1; j < listaUsuarios.getTamanho() - i; j++) {
                 contComparacao++;
-                if (listaUsuarios.retornaInfo(j - 1).getAvaliacaoMedia() > listaUsuarios.retornaInfo(j).getAvaliacaoMedia()) {
+                if (listaUsuarios.retornaInfo(j).getIdUsuario() < listaUsuarios.retornaInfo(j-1).getIdUsuario()) {
                     listaUsuarios.troca(j, j - 1, relatorio);
 
                     contComparacao++;
@@ -47,7 +47,7 @@ public class AlgoritmosOrdenacao {
             Usuario chave = listaUsuarios.retornaInfo(i);
             int j = i - 1;
 
-            while (j >= 0 && listaUsuarios.retornaInfo(j).getAvaliacaoMedia() > chave.getAvaliacaoMedia()) {
+            while (j >= 0 && listaUsuarios.retornaInfo(j).getIdUsuario() > chave.getIdUsuario()) {
                 contComparacao++;
                 listaUsuarios.altera(j + 1, listaUsuarios.retornaInfo(j));
                 j = j - 1;
@@ -107,7 +107,7 @@ public class AlgoritmosOrdenacao {
         int k = esq;
         while (i < n1 && j < n2) {
             contInteracao++;
-            if (esqArray.retornaInfo(i).getAvaliacaoMedia() <= dirArray.retornaInfo(j).getAvaliacaoMedia()) {
+            if (esqArray.retornaInfo(i).getIdUsuario() <= dirArray.retornaInfo(j).getIdUsuario()) {
                 listaUsuarios.altera(k, esqArray.retornaInfo(i));
                 contInteracao++;
                 i++;
@@ -172,7 +172,7 @@ public class AlgoritmosOrdenacao {
         for (int j = min; j < max; j++) {
             contInteracao++;
             //Compara as strings
-            if (listaUsuarios.retornaInfo(j).getAvaliacaoMedia() < pivo.getAvaliacaoMedia()) {
+            if (listaUsuarios.retornaInfo(j).getIdUsuario() < pivo.getIdUsuario()) {
                 i++;//avanca o menor
                 listaUsuarios.troca(i, j, relatorio);
             }
@@ -211,7 +211,7 @@ public class AlgoritmosOrdenacao {
             contInteracao++;
             for (int j = 1; j < (n - i); j++) {
                 contInteracao++;
-                if (listaUsuarios.retornaInfo(indice[j - 1]).getAvaliacaoMedia() > listaUsuarios.retornaInfo(indice[j]).getAvaliacaoMedia()) {
+                if (listaUsuarios.retornaInfo(indice[j - 1]).getIdUsuario() > listaUsuarios.retornaInfo(indice[j]).getIdUsuario()) {
                     //swap elements  
                     temp = indice[j - 1];
                     indice[j - 1] = indice[j];
@@ -232,7 +232,7 @@ public class AlgoritmosOrdenacao {
 
         for (int j = inicio; j <= fim - 1; j++) {
             contInteracao++;
-            if (listaUsuarios.retornaInfo(j).getAvaliacaoMedia() <= pivo.getAvaliacaoMedia()) {
+            if (listaUsuarios.retornaInfo(j).getIdUsuario() <= pivo.getIdUsuario()) {
                 i = i + 1;
                 listaUsuarios.troca(i, j, relatorio);
                 contInteracao++;
@@ -314,12 +314,12 @@ public class AlgoritmosOrdenacao {
         int contInteracao = 0;
 
         // Se filho da esq é maior que a raiz
-        if (esq < n && ((listaUsuarios.retornaInfo(esq).getAvaliacaoMedia() > listaUsuarios.retornaInfo(maior).getAvaliacaoMedia()))) {
+        if (esq < n && ((listaUsuarios.retornaInfo(esq).getIdUsuario() > listaUsuarios.retornaInfo(maior).getIdUsuario()))) {
             maior = esq;
         }
         contInteracao++;
         // Se filho da dir é maior que a raiz
-        if (dir < n && ((listaUsuarios.retornaInfo(dir).getAvaliacaoMedia() > listaUsuarios.retornaInfo(maior).getAvaliacaoMedia()))) {
+        if (dir < n && ((listaUsuarios.retornaInfo(dir).getIdUsuario() > listaUsuarios.retornaInfo(maior).getIdUsuario()))) {
             maior = dir;
         }
         contInteracao++;
@@ -355,7 +355,7 @@ public class AlgoritmosOrdenacao {
                 contInteracao++;
                 c = listaUsuarios.retornaInfo(i);
                 j = i;
-                while (j >= h && (listaUsuarios.retornaInfo(j - h).getAvaliacaoMedia() >= c.getAvaliacaoMedia())) {
+                while (j >= h && (listaUsuarios.retornaInfo(j - h).getIdUsuario() >= c.getIdUsuario())) {
                     contInteracao++;
                     listaUsuarios.altera(j, listaUsuarios.retornaInfo(j - h));
                     contInteracao++;

@@ -34,6 +34,7 @@ public class TrabalhoEd2 {
         AnaliseDados ad;
         lerArquivo();
         
+        //Ordenacao
         for (int i = 0; i < 5; i++) {
             System.out.println("Rodando semente " + (i + 1));
             ad = new AnaliseDados(1000,arquivo, i+1 );
@@ -42,8 +43,11 @@ public class TrabalhoEd2 {
             ad = new AnaliseDados(50000,arquivo, i+1 );
             ad = new AnaliseDados(100000,arquivo, i+1 );
             ad = new AnaliseDados(500000,arquivo, i+1 );
+            ad = new AnaliseDados(1000000,arquivo, i+1 );
         }
 
+        //Hash
+        
         System.out.println("Execução Terminada");
     }
     
