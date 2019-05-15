@@ -12,9 +12,9 @@ public class Usuario {
     private double avaliacaoMedia = 0;
     private ListaEncadeada <Avaliacao> listaAvaliacao;
    
-    public Usuario(int id, int idFilme, double avaliacao) {      
+    public Usuario(int id, int idFilme, double avaliacao, double tempo) {      
         this.idFilme = idFilme;
-        Avaliacao av = new Avaliacao(id,avaliacao);
+        Avaliacao av = new Avaliacao(id,avaliacao, tempo);
         this.listaAvaliacao = new ListaEncadeada<>();
         this.listaAvaliacao.insereFinal(av);     
     }

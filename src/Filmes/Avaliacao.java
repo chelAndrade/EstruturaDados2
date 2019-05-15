@@ -13,10 +13,12 @@ public class Avaliacao {
     
     private int idFilme;
     private double nota;
+    private double tempo;
 
-    public Avaliacao(int idFilme, double nota) {
+    public Avaliacao(int idFilme, double nota, double tempo) {
         this.idFilme = idFilme;
         this.nota = nota;
+        this.tempo = tempo;
     }
 
     public double getNota() {
@@ -34,6 +36,23 @@ public class Avaliacao {
     public void setIdUsuario(int idFilme) {
         this.idFilme = idFilme;
     }
+
+    public int getIdFilme() {
+        return idFilme;
+    }
+
+    public void setIdFilme(int idFilme) {
+        this.idFilme = idFilme;
+    }
+
+    public double getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(double tempo) {
+        this.tempo = tempo;
+    }
+    
     
     
     

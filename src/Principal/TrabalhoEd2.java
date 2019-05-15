@@ -34,7 +34,7 @@ public class TrabalhoEd2 {
         AnaliseDados ad;
         lerArquivo();
         
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println("Rodando semente " + (i + 1));
             ad = new AnaliseDados(1000,arquivo, i+1 );
             ad = new AnaliseDados(5000,arquivo, i+1 );

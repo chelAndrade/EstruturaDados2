@@ -9,7 +9,6 @@ import Algoritmos.AlgoritmosOrdenacao;
 import Algoritmos.ListaEncadeada;
 import Filmes.Avaliacao;
 import Filmes.Usuario;
-import Relatorio.Relatorio;
 import Relatorio.RelatorioOrdenacao;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -29,7 +28,6 @@ import java.util.List;
  * @author ice
  */
 public class AnaliseDados {
-
     private int quantidade;
     private int semente;
     private ListaEncadeada<Usuario> listaFilmes;
@@ -82,13 +80,14 @@ public class AnaliseDados {
                     }
                     int id = Integer.parseInt(partes[0]);
                     int idFilme = Integer.parseInt(partes[1]);;
-                    double avaliacao = Double.parseDouble(partes[2]);;
-                    Usuario filme = new Usuario(id, idFilme, avaliacao);
-                    int index = verificaFilme(filme);
+                    double avaliacao = Double.parseDouble(partes[2]);
+                    double tempo = Double.parseDouble(partes[3]);
+                    Usuario usuario = new Usuario(id, idFilme, avaliacao, tempo);
+                    int index = verificaFilme(usuario);
                     if (index == -1) {
-                        this.listaFilmes.insereFinal(filme);
+                        this.listaFilmes.insereFinal(usuario);
                     } else {
-                        Avaliacao av = new Avaliacao(id, avaliacao);
+                        Avaliacao av = new Avaliacao(id, avaliacao, tempo);
                         this.listaFilmes.retornaInfo(index).addAvaliacao(av);
                     }
                     numAleatorios.remove(0);
@@ -110,9 +109,9 @@ public class AnaliseDados {
         }
     }
 
-    private int verificaFilme(Usuario filme) {
+    private int verificaFilme(Usuario usuario) {
         for (int i = 0; i < listaFilmes.getTamanho(); i++) {
-            if (filme.getIdFilme() == listaFilmes.retornaInfo(i).getIdFilme()) {
+            if (usuario.getIdFilme() == listaFilmes.retornaInfo(i).getIdFilme()) {
                 return i;
             }
         }
